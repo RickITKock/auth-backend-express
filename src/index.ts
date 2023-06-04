@@ -14,6 +14,7 @@ server.listen(PORT, (): void => {
   swaggerDocs(app, PORT);
 });
 
+// Adding a comment
 const shutdown = (signal: string) => {
   server.close(() => {
     console.log(`${signal} RECEIVED. Gracefully shutting down.`);

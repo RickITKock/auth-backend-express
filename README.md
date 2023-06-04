@@ -19,7 +19,7 @@ This repository contains a .env file called .env.example. You can copy/paste env
 In the project directory, to run the application, you can run:
 
 ```bash
-npm run dev
+npm start
 ```
 
 If you haven't already created a .env file, the application will by default run on [http://localhost:8000](http://localhost:8000).

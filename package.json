@@ -5,16 +5,11 @@
   "main": "./src/index.ts",
   "scripts": {
     "test": "jest --config src/jest.config.ts --watchAll --verbose --detectOpenHandles",
-    "build": "npx tsc --project tsconfig.build.json",
-    "start:build": "npx tsc -w --project tsconfig.build.json",
-    "start:run": "nodemon build/index.js",
-    "start": "concurrently npm:start:*",
-    "start-dev": "NODE_ENV=development concurrently npm:start:*",
-    "start-prod": "NODE_ENV=production concurrently npm:start:*"
+    "start": "ts-node-dev src/index.ts"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RickITKock/express-server-to-server"
+    "url": "http://github.com/RickITKock/auth-backend-express"
   },
   "author": "",
   "license": "ISC",
@@ -46,6 +41,7 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.2",
     "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
     "winston": "^3.8.2",
     "zod": "^3.19.1"
   }
