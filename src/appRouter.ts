@@ -1,4 +1,5 @@
-import { Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
+import { signUpUserHandler } from "./resources/user/user.handler";
 
 const appRouter = Router();
 
@@ -33,32 +34,17 @@ appRouter.use("/", (req, res, next) => {
 
 /**
  * @openapi
- *  /app/products:
- *   get:
- *    tags:
- *    - Products
- *    summary: Get Products
- *    description: Returns all products
- *    operationId: getProducts
- *    responses:
- *     200:
- *      description: Successful operation.
+ *  /api/users/signup:
  *   post:
  *    tags:
- *    - Products
- *    summary: Create a new Product
- *    description: Creates and returns a new Product
- *    operationId: createProduct
+ *    - Users
+ *    summary: Sign up a user
+ *    description: Sign up a user
+ *    operationId: signUpUser
  *    responses:
  *     200:
  *      description: Successful operation.
- *     409:
- *      description: Resource already exists.
  */
-
-// appRouter
-//   .route("/products")
-//   .get(getProductsHandler)
-//   .post(validateRequest(CreateProductInputSchema), createProductHandler);
+appRouter.post("/api/users/signup", signUpUserHandler);
 
 export default appRouter;
