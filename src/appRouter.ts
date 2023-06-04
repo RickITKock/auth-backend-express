@@ -45,6 +45,8 @@ appRouter.use("/", (req, res, next) => {
  *    responses:
  *     200:
  *      description: Successful operation.
+ *     400:
+ *      description: Invalid email or password(s).
  */
 appRouter.post(
   "/api/users/signup",
