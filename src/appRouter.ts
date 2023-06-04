@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response, Router } from "express";
+import { body, validationResult } from "express-validator";
 import { signUpUserHandler } from "./resources/user/user.handler";
 
 const appRouter = Router();
@@ -45,6 +46,16 @@ appRouter.use("/", (req, res, next) => {
  *     200:
  *      description: Successful operation.
  */
-appRouter.post("/api/users/signup", signUpUserHandler);
+appRouter.post(
+  "/api/users/signup",
+  [
+    body("email").isEmail().withMessage("Email must be a valid email address"),
+    body("password")
+      .trim()
+      .isLength({ min: 4, max: 20 })
+      .withMessage("Password must be between 4 and 6 characters long"),
+  ],
+  signUpUserHandler
+);
 
 export default appRouter;
