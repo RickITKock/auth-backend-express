@@ -1,21 +1,4 @@
 import { Router } from "express";
-import { validateRequest } from "./middleware/validateRequest";
-import {
-  createOrUpdateShoppingCartHandler,
-  getShoppingCartHandler,
-} from "./resources/cart/cart.handler";
-import { CreateOrUpdateShoppingCartInputSchema } from "./resources/cart/cart.input-schema";
-import {
-  createProductHandler,
-  deleteProductHandler,
-  getProductsHandler,
-  updateProductHandler,
-} from "./resources/product/product.handler";
-import {
-  CreateProductInputSchema,
-  DeleteProductInputSchema,
-  UpdateProductInputSchema,
-} from "./resources/product/product.input-schema";
 
 const appRouter = Router();
 
@@ -73,72 +56,9 @@ appRouter.use("/", (req, res, next) => {
  *      description: Resource already exists.
  */
 
-appRouter
-  .route("/products")
-  .get(getProductsHandler)
-  .post(validateRequest(CreateProductInputSchema), createProductHandler);
-
-/**
- * @openapi
- *  /app/products/{id}:
- *   put:
- *    tags:
- *    - Products
- *    summary: Update an existing Product
- *    description: Updates and returns an existing Product
- *    operationId: updateProduct
- *    responses:
- *     200:
- *      description: Successful operation.
- *     404:
- *      description: Nothing found matching the given criteria.
- *   delete:
- *    tags:
- *    - Products
- *    summary: Delete an existing Product
- *    description: Deletes an existing Product
- *    operationId: deleteProduct
- *    responses:
- *     204:
- *      description: Successful operation.
- *     404:
- *      description: Nothing found matching the given criteria.
- */
-appRouter
-  .route("/products/:id")
-  .put(validateRequest(UpdateProductInputSchema), updateProductHandler)
-  .delete(validateRequest(DeleteProductInputSchema), deleteProductHandler);
-
-/**
- * @openapi
- *  /app/cart:
- *   get:
- *    tags:
- *    - Cart
- *    summary: Get Shopping Cart
- *    description: Returns Shopping Cart
- *    operationId: getShoppingCart
- *    responses:
- *     200:
- *      description: Successful operation.
- *   put:
- *    tags:
- *    - Cart
- *    summary: Creates a new Shopping Cart
- *    description: Creates and returns a new Shopping Cart
- *    operationId: createShoppingCart
- *    responses:
- *     200:
- *      description: Successful operation.
- *     409:
- *      description: Resource already exists.
- */
-appRouter
-  .route("/cart")
-  .get(getShoppingCartHandler)
-  .put(
-    validateRequest(CreateOrUpdateShoppingCartInputSchema),
-    createOrUpdateShoppingCartHandler
-  );
+// appRouter
+//   .route("/products")
+//   .get(getProductsHandler)
+//   .post(validateRequest(CreateProductInputSchema), createProductHandler);
 
 export default appRouter;
