@@ -12,7 +12,7 @@ npm install
 
 ## Create .env file
 
-This repository contains a .env file called .env.example. You can copy/paste env.example, rename it to .env. and modify variebles.
+This repository contains a .env file called <code>.env.example</code>. You can copy/paste env.example, rename it to <code>.env</code>. and modify variables.
 
 ## Running the application
 
