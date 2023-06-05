@@ -24,3 +24,13 @@ npm start
 
 If you haven't already created a .env file, the application will by default run on [http://localhost:8000](http://localhost:8000).
 You can open the link in your web browser. The page will reload if you make edits.
+
+## Test Driven Development
+
+It is assumed that you use the project to continue development using the test driven development method. You can run tests using the following command while developing:
+
+```bash
+npm test
+```
+
+Tests will restart automatically with each change in code.
