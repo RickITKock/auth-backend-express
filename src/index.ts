@@ -1,9 +1,9 @@
 import * as dotenv from "dotenv";
 import http from "http";
-import { swaggerDocs } from "./utils/swaggerDocs";
 dotenv.config();
 
 import app from "./app";
+import logger from "./utils/logger";
 
 const PORT: number = process.env.PORT ? +process.env.PORT : 8000;
 
@@ -11,10 +11,9 @@ const server = http.createServer(app);
 
 server.listen(PORT, (): void => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
-  swaggerDocs(app, PORT);
+  logger.info(`Docs available at http://localhost:${PORT}/docs`);
 });
 
-// Adding a comment
 const shutdown = (signal: string) => {
   server.close(() => {
     console.log(`${signal} RECEIVED. Gracefully shutting down.`);

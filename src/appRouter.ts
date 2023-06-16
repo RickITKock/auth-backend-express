@@ -1,8 +1,30 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { body, validationResult } from "express-validator";
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+import { NotFoundError } from "./error/NotFoundError";
 import { signUpUserHandler } from "./resources/user/user.handler";
 
 const appRouter = Router();
+
+const options: swaggerJsdoc.Options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Webshop API",
+      version: "0.4.4",
+      description: "Webshop API specification.",
+      contact: { email: "rit.kock@gmail.com" },
+      license: {
+        name: "Apache 2.0",
+        url: "http://www.apache.org/licenses/LICENSE-2.0.html",
+      },
+    },
+  },
+  apis: ["./src/appRouter.ts", "./src/v1/*/*.*-schema.ts"],
+};
+
+const swaggerSpec = swaggerJsdoc(options);
 
 /**
  * @openapi
@@ -59,5 +81,18 @@ appRouter.post(
   ],
   signUpUserHandler
 );
+
+// Swagger page
+appRouter.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Docs in JSON format
+appRouter.get("/docs.json", (req: Request, res: Response) => {
+  res.setHeader("Content-Type", "application/json");
+  res.send(swaggerSpec);
+});
+
+appRouter.all("*", async (req: Request, res: Response, next: NextFunction) => {
+  return next(new NotFoundError());
+});
 
 export default appRouter;
